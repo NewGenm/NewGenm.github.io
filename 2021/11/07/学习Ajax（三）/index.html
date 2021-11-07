@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"newgenm.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这个篇章来解决跨域请求的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习Ajax（三）">
+<meta property="og:url" content="https://newgenm.github.io/2021/11/07/%E5%AD%A6%E4%B9%A0Ajax%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="My Blog">
+<meta property="og:description" content="这个篇章来解决跨域请求的问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-07T10:23:46.000Z">
+<meta property="article:modified_time" content="2021-11-07T14:43:06.467Z">
+<meta property="article:author" content="余博文">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://newgenm.github.io/2021/11/07/%E5%AD%A6%E4%B9%A0Ajax%EF%BC%88%E4%B8%89%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>学习Ajax（三） | My Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">My Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录脚步</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">6</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://newgenm.github.io/2021/11/07/%E5%AD%A6%E4%B9%A0Ajax%EF%BC%88%E4%B8%89%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="余博文">
+      <meta itemprop="description" content="余博文的小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          学习Ajax（三）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-07 18:23:46 / 修改时间：22:43:06" itemprop="dateCreated datePublished" datetime="2021-11-07T18:23:46+08:00">2021-11-07</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这个篇章来解决跨域请求的问题</p>
+<span id="more"></span>
+<h2 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h2><p>当一个请求url的协议、域名、端口三者之间任意一个与当前页面url不同即为跨域</p>
+<p>| 当前页面url | 当前页面url | 是否跨域 | 原因 |<br>| <a target="_blank" rel="noopener" href="http://www.test.com/">http://www.test.com/</a> | <a target="_blank" rel="noopener" href="http://www.test.com/index.html">http://www.test.com/index.html</a> | 否 | 同源（协议、域名、端口号相同） |<br>| — | — |  — |  — |<br>|<a target="_blank" rel="noopener" href="http://www.test.com/|">http://www.test.com/|</a>    <a target="_blank" rel="noopener" href="https://www.test.com/index.html|">https://www.test.com/index.html|</a>    跨域 |    协议不同（http/https）|<br>|<a target="_blank" rel="noopener" href="http://www.test.com/|">http://www.test.com/|</a>    <a target="_blank" rel="noopener" href="http://www.baidu.com/|">http://www.baidu.com/|</a>    跨域 |    主域名不同（test/baidu）|<br>|<a target="_blank" rel="noopener" href="http://www.test.com/|">http://www.test.com/|</a>    <a target="_blank" rel="noopener" href="http://blog.test.com/|">http://blog.test.com/|</a>    跨域 |    子域名不同（www/blog）|<br>|<a target="_blank" rel="noopener" href="http://www.test.com:8080/|">http://www.test.com:8080/|</a>    <a target="_blank" rel="noopener" href="http://www.test.com:7001/|">http://www.test.com:7001/|</a>    跨域 |    端口号不同（8080/7001）|</p>
+<h2 id="为什么会出现跨域"><a href="#为什么会出现跨域" class="headerlink" title="为什么会出现跨域"></a>为什么会出现跨域</h2><p>出于浏览器的同源策略限制。同源策略（Sameoriginpolicy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。同源策略会阻止一个域的javascript脚本和另外一个域的内容进行交互。</p>
+<h2 id="jsonp解决跨域问题"><a href="#jsonp解决跨域问题" class="headerlink" title="jsonp解决跨域问题"></a>jsonp解决跨域问题</h2><h3 id="jsonp是什么"><a href="#jsonp是什么" class="headerlink" title="jsonp是什么"></a>jsonp是什么</h3><p>jsonp（JSON with Padding），是一个非官方的跨域解决方案，只支持get请求，<br>jsonp的原理是使用script标签的跨域能力来发送请求</p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><p>流程：<br>    1.用户在input中输入完成，失去焦点后，触发事件<br>    2.事件获取用户输入的值（这里没有与后端进行比较，只是进行模拟）<br>    3.创建一个script标签，并设置scr属性，url为后端的对应地址<br>    4.将script插入到全局中<br>    5.事件结束后，全局中就会有一个新的script标签，会进行一个GET请求<br>    6.后端接收到请求后，进行对比数据（模拟就没有进行对比）<br>    7.发现数据不对，将data中的数据使用json转换为字符串<br>    8.发送回用户端，发送内容为<code>handle($&#123;str&#125;)</code> （ES6新语法，字符串和变量拼串）<br>    9.使用handel()，用户页面发生变化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//获取 input 元素</span><br><span class="line">const input = document.querySelector(&#x27;input&#x27;);</span><br><span class="line">const p = document.querySelector(&#x27;p&#x27;);</span><br><span class="line">        </span><br><span class="line">//声明 handle 函数</span><br><span class="line">function handle(data)&#123;</span><br><span class="line">    input.style.border = &quot;solid 1px #f00&quot;;</span><br><span class="line">    //修改 p 标签的提示文本</span><br><span class="line">    p.innerHTML = data.msg;</span><br><span class="line">&#125;</span><br><span class="line">// jsonp发送跨域请求原理，通过script标签能够跨域请求的特性，在事件中的script标签，即动态src地址，最后将script标签暴露到全局，即可实现跨域请求</span><br><span class="line"></span><br><span class="line">//绑定事件</span><br><span class="line">input.onblur = function()&#123;</span><br><span class="line">    //获取用户的输入值</span><br><span class="line">    let username = this.value;</span><br><span class="line">    //向服务器端发送请求 检测用户名是否存在</span><br><span class="line">    //1. 创建 script 标签</span><br><span class="line">    const script = document.createElement(&#x27;script&#x27;);</span><br><span class="line">    //2. 设置标签的 src 属性</span><br><span class="line">    script.src = &#x27;http://127.0.0.1:8000/check-username&#x27;;</span><br><span class="line">    //3. 将 script 插入到文档中</span><br><span class="line">    document.body.appendChild(script);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//后端内容</span><br><span class="line">//用户名检测是否存在</span><br><span class="line">app.all(&#x27;/check-username&#x27;,(request, response) =&gt; &#123;</span><br><span class="line">    const data = &#123;</span><br><span class="line">        exist: 1,</span><br><span class="line">        msg: &#x27;用户名已经存在&#x27;</span><br><span class="line">    &#125;;</span><br><span class="line">    //将数据转化为字符串</span><br><span class="line">    let str = JSON.stringify(data);</span><br><span class="line">    //返回结果</span><br><span class="line">    response.end(`handle($&#123;str&#125;)`);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="jQuery使用jsonp"><a href="#jQuery使用jsonp" class="headerlink" title="jQuery使用jsonp"></a>jQuery使用jsonp</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 在url后面添加?callback=?是固定格式</span><br><span class="line">// #result是一个div，返回回调函数后就会获得数据</span><br><span class="line">$.getJSON(&#x27;http://127.0.0.1:8000/jquery-jsonp-server?callback=?&#x27;, function(data)&#123;</span><br><span class="line">    $(&#x27;#result&#x27;).html(`</span><br><span class="line">        名称: $&#123;data.name&#125;&lt;br&gt;</span><br><span class="line">        地区: $&#123;data.city&#125;</span><br><span class="line">    `)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 后端内容</span><br><span class="line">//jQuery发送jsonp</span><br><span class="line">app.all(&#x27;/jquery-jsonp-server&#x27;,(request, response) =&gt; &#123;</span><br><span class="line">    // response.send(&#x27;console.log(&quot;hello jsonp&quot;)&#x27;);</span><br><span class="line">    const data = &#123;</span><br><span class="line">        name:&#x27;城市&#x27;,</span><br><span class="line">        city: [&#x27;北京&#x27;,&#x27;上海&#x27;,&#x27;深圳&#x27;]</span><br><span class="line">    &#125;;</span><br><span class="line">    //将数据转化为字符串</span><br><span class="line">    let str = JSON.stringify(data);</span><br><span class="line">    //接收 callback 参数</span><br><span class="line">    let cb = request.query.callback;</span><br><span class="line"></span><br><span class="line">    //返回结果</span><br><span class="line">    // 返回的是一个callback函数，参数是str</span><br><span class="line">    response.end(`$&#123;cb&#125;($&#123;str&#125;)`); //转换为代码是 cb(str) 一个回调函数</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/04/%E5%AD%A6%E4%B9%A0Ajax%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="学习Ajax（二）">
+      <i class="fa fa-chevron-left"></i> 学习Ajax（二）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%B7%A8%E5%9F%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是跨域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%87%BA%E7%8E%B0%E8%B7%A8%E5%9F%9F"><span class="nav-number">2.</span> <span class="nav-text">为什么会出现跨域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsonp%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">jsonp解决跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jsonp%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">3.1.</span> <span class="nav-text">jsonp是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jQuery%E4%BD%BF%E7%94%A8jsonp"><span class="nav-number">3.3.</span> <span class="nav-text">jQuery使用jsonp</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="余博文"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">余博文</p>
+  <div class="site-description" itemprop="description">余博文的小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/NewGenm" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;NewGenm" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:840205028@qq.com" title="E-Mail → mailto:840205028@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="http://wpa.qq.com/msgrd?v=3&uin=840205028&site=qq&menu=yes" title="QQ → http:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;3&amp;uin&#x3D;840205028&amp;site&#x3D;qq&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fab fa-qq fa-fw"></i>QQ</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">余博文</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
