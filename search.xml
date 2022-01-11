@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>vue2中发送axios请求会产生的一些错误</title>
+      <link href="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/"/>
+      <url>/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/</url>
+      
+        <content type="html"><![CDATA[<h2 id="记录我遇到的一些与axios有关的错误"><a href="#记录我遇到的一些与axios有关的错误" class="headerlink" title="记录我遇到的一些与axios有关的错误"></a>记录我遇到的一些与axios有关的错误</h2><span id="more"></span><h2 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h2><p>我在发送axios请求获得一些数据时，出现了一个错误<br><img src="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/1.png"><br>呈现错误：“TypeError:无法读取未定义的属性（读取 ‘avatarUrl’）”<br>意思是我没有定义该属性，但网页上是正常显示</p><p>相关代码：</p><p>发送的axios请求</p><p><img src="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/2.png"></p><p>把请求到的内容挂载到网页上</p><p><img src="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/4.png"><br><img src="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/3.png"></p><p>奇怪的是叠了两层的a.b没有报错，叠了三层的a.b.c报错了</p><h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>通过搜索我发现了问题，应该是挂载的时候，三层数据a.b.c没有请求到，所以显示没有该属性<br>我加了个v-if来判断是否显示该数据，就不会报错了</p><p>这里为了不破坏结构，使用了一层template来判断</p><p><img src="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/5.png"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>El-UI库按需引入的问题</title>
       <link href="/2021/12/23/El-UI%E5%BA%93%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/"/>
       <url>/2021/12/23/El-UI%E5%BA%93%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/</url>
