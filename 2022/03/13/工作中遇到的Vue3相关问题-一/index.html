@@ -21,26 +21,28 @@
     var CONFIG = {"hostname":"newgenm.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="记录我遇到的一些与axios有关的错误">
+  <meta name="description" content="记录工作上遇到Vue3相关的问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue2中发送axios请求会产生的一些错误">
-<meta property="og:url" content="https://newgenm.github.io/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/index.html">
+<meta property="og:title" content="工作中遇到的Vue3相关问题(一)">
+<meta property="og:url" content="https://newgenm.github.io/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/index.html">
 <meta property="og:site_name" content="My Blog">
-<meta property="og:description" content="记录我遇到的一些与axios有关的错误">
+<meta property="og:description" content="记录工作上遇到Vue3相关的问题">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://newgenm.github.io/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/1.png">
-<meta property="og:image" content="https://newgenm.github.io/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/2.png">
-<meta property="og:image" content="https://newgenm.github.io/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/4.png">
-<meta property="og:image" content="https://newgenm.github.io/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/3.png">
-<meta property="og:image" content="https://newgenm.github.io/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/5.png">
-<meta property="article:published_time" content="2022-01-11T13:59:05.000Z">
-<meta property="article:modified_time" content="2022-01-11T14:15:26.476Z">
+<meta property="og:image" content="https://newgenm.github.io/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/1.png">
+<meta property="og:image" content="https://newgenm.github.io/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/2.png">
+<meta property="og:image" content="https://newgenm.github.io/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/3.png">
+<meta property="og:image" content="https://newgenm.github.io/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/4.png">
+<meta property="og:image" content="https://newgenm.github.io/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/5.png">
+<meta property="og:image" content="https://newgenm.github.io/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/6.png">
+<meta property="og:image" content="https://newgenm.github.io/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/7.png">
+<meta property="article:published_time" content="2022-03-13T14:04:11.000Z">
+<meta property="article:modified_time" content="2022-03-13T14:31:28.410Z">
 <meta property="article:author" content="余博文">
 <meta property="article:tag" content="博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://newgenm.github.io/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/1.png">
+<meta name="twitter:image" content="https://newgenm.github.io/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/1.png">
 
-<link rel="canonical" href="https://newgenm.github.io/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/">
+<link rel="canonical" href="https://newgenm.github.io/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/">
 
 
 <script id="page-configurations">
@@ -53,7 +55,7 @@
   };
 </script>
 
-  <title>vue2中发送axios请求会产生的一些错误 | My Blog</title>
+  <title>工作中遇到的Vue3相关问题(一) | My Blog</title>
   
 
 
@@ -168,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://newgenm.github.io/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/">
+    <link itemprop="mainEntityOfPage" href="https://newgenm.github.io/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -181,7 +183,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          vue2中发送axios请求会产生的一些错误
+          工作中遇到的Vue3相关问题(一)
         </h1>
 
         <div class="post-meta">
@@ -192,7 +194,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-11 21:59:05 / 修改时间：22:15:26" itemprop="dateCreated datePublished" datetime="2022-01-11T21:59:05+08:00">2022-01-11</time>
+              <time title="创建时间：2022-03-13 22:04:11 / 修改时间：22:31:28" itemprop="dateCreated datePublished" datetime="2022-03-13T22:04:11+08:00">2022-03-13</time>
             </span>
 
           
@@ -213,18 +215,53 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>记录我遇到的一些与axios有关的错误</p>
+        <p>记录工作上遇到Vue3相关的问题</p>
 <span id="more"></span>
-<h2 id="发现问题"><a href="#发现问题" class="headerlink" title="发现问题"></a>发现问题</h2><p>我在发送axios请求获得一些数据时，出现了一个错误<br><img src="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/1.png"><br>呈现错误：“TypeError:无法读取未定义的属性（读取 ‘avatarUrl’）”<br>意思是我没有定义该属性，但网页上是正常显示</p>
-<p>相关代码：</p>
-<p>发送的axios请求</p>
-<p><img src="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/2.png"></p>
-<p>把请求到的内容挂载到网页上</p>
-<p><img src="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/4.png"><br><img src="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/3.png"></p>
-<p>奇怪的是叠了两层的a.b没有报错，叠了三层的a.b.c报错了</p>
-<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>通过搜索我发现了问题，应该是挂载的时候，三层数据a.b.c没有请求到，所以显示没有该属性<br>我加了个v-if来判断是否显示该数据，就不会报错了</p>
-<p>这里为了不破坏结构，使用了一层template来判断</p>
-<p><img src="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/5.png"></p>
+
+<h2 id="setup相关"><a href="#setup相关" class="headerlink" title="setup相关"></a>setup相关</h2><p>setup是Vue3 的一大特性函数, 它有几个特性:</p>
+<ol>
+<li><p>setup函数是处于 生命周期函数 beforeCreate 和 Created 两个钩子函数之间的函数；</p>
+</li>
+<li><p>setup函数是 Composition API（组合API）的入口；</p>
+</li>
+<li><p>在setup函数中定义的变量和方法最后都是需要 return 出去的 不然无法再模板中使用；</p>
+</li>
+<li><p>setup函数可以使用以on开头的的生命周期函数，（created和beforecreate没有对应的函数，因为setup就是对应的）但不能在setup函数中配置生命周期属性，只能在外面配置；</p>
+</li>
+</ol>
+<p>setup函数的注意点：</p>
+<ol>
+<li><p>由于在执行 setup函数的时候，还没有执行 Created 生命周期方法，所以在 setup 函数中，无法使用 data 和 methods 的变量和方法；</p>
+</li>
+<li><p>由于我们不能在 setup函数中使用 data 和 methods，所以 Vue 为了避免我们错误的使用，直接将 setup函数中的this修改成了 undefined；</p>
+</li>
+<li><p>setup函数只能是同步的不能是异步的；</p>
+</li>
+</ol>
+<h2 id="defineComponent-函数"><a href="#defineComponent-函数" class="headerlink" title="defineComponent 函数"></a>defineComponent 函数</h2><p>defineComponent函数，只是对setup函数进行封装，返回options的对象；<br>defineComponent最重要的是：在TypeScript下，给予了组件 正确的参数类型推断；</p>
+<ol>
+<li><p>defineComponent可以给组件的setup方法准确的参数类型定义；</p>
+</li>
+<li><p>defineComponent 可以接受显式的自定义 props 接口或从属性验证对象中自动推断；</p>
+</li>
+<li><p>defineComponent 可以正确适配无 props、数组 props 等形式；</p>
+</li>
+<li><p>引入 defineComponent() 以正确推断 setup() 组件的参数类型；</p>
+</li>
+</ol>
+<h2 id="reactive-相关"><a href="#reactive-相关" class="headerlink" title="reactive 相关"></a>reactive 相关</h2><p>对一个已经使用reactive函数的对象，即变为响应式后，用一个正常对象 <strong><big>直接等于的响应式函数的话，被等于的会变成响应式</big></strong></p>
+<p><img src="/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/1.png"></p>
+<p>如果对一个对象使用解构赋值的话  <strong><big>可能会变成响应式</big></strong></p>
+<p><img src="/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/2.png"></p>
+<p>如果是将响应式对象的内容清空，可以使用递归的方法将内容清空</p>
+<p><img src="/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/3.png"></p>
+<h2 id="重新加载-刷新一个组件-标签"><a href="#重新加载-刷新一个组件-标签" class="headerlink" title="重新加载/刷新一个组件/标签"></a>重新加载/刷新一个组件/标签</h2><p>使用v-if<br>先销毁，再给个异步，重新加载</p>
+<p><img src="/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/4.png"></p>
+<h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><p><img src="/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/5.png"><br>父组件 ：xxx = ‘abc’<br>xxx为 子组件接收的变量名<br>abc为你想传给子组件的内容，可以是基础数据，也可以是数组、对象、函数</p>
+<p><img src="/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/6.png"></p>
+<p>子组件需要在props中保存收到的数据，如果不在props接收，则在context.attrs中可以获取</p>
+<p><img src="/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/7.png"></p>
+<p>在setup中传入props，才能在其中使用，<br>可以用解构赋值的方法为props中的内容重命名</p>
 
     </div>
 
@@ -250,13 +287,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/12/23/El-UI%E5%BA%93%E6%8C%89%E9%9C%80%E5%BC%95%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/" rel="prev" title="El-UI库按需引入的问题">
-      <i class="fa fa-chevron-left"></i> El-UI库按需引入的问题
+    <a href="/2022/01/11/vue2%E4%B8%AD%E5%8F%91%E9%80%81axios%E8%AF%B7%E6%B1%82%E4%BC%9A%E4%BA%A7%E7%94%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E9%94%99%E8%AF%AF/" rel="prev" title="vue2中发送axios请求会产生的一些错误">
+      <i class="fa fa-chevron-left"></i> vue2中发送axios请求会产生的一些错误
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/03/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84Vue3%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98-%E4%B8%80/" rel="next" title="工作中遇到的Vue3相关问题(一)">
-      工作中遇到的Vue3相关问题(一) <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -315,7 +349,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E7%8E%B0%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">发现问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">解决问题</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#setup%E7%9B%B8%E5%85%B3"><span class="nav-number">1.</span> <span class="nav-text">setup相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#defineComponent-%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">defineComponent 函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reactive-%E7%9B%B8%E5%85%B3"><span class="nav-number">3.</span> <span class="nav-text">reactive 相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E5%8A%A0%E8%BD%BD-%E5%88%B7%E6%96%B0%E4%B8%80%E4%B8%AA%E7%BB%84%E4%BB%B6-%E6%A0%87%E7%AD%BE"><span class="nav-number">4.</span> <span class="nav-text">重新加载&#x2F;刷新一个组件&#x2F;标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#props"><span class="nav-number">5.</span> <span class="nav-text">props</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
